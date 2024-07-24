@@ -2,14 +2,16 @@ import { useState, useEffect } from "react";
 import {
   EmojisWrapper,
   GameContainer,
+  GameTitle,
   HintsWrapper,
-  HomeContainer,
+  NextButton,
+  SectionContainer,
   TimeBar,
   TimeBarFill,
-} from "./HomeElements";
+} from "./GameElements";
 import movies from "../../assets/movies.json";
 
-const HomeSection = () => {
+const GameSection = () => {
   const timerDuration = 5;
   const [currentMovie, setCurrentMovie] = useState(null);
   const [timeLeft, setTimeLeft] = useState(timerDuration);
@@ -34,6 +36,11 @@ const HomeSection = () => {
     return () => clearInterval(intervalId);
   }, []);
 
+  const handleNextClick =()=>{
+    // console.log("press next");
+    window.location.reload()
+  }
+
   const getHint = (name) => {
     const words = name.split(" ");
     const numWords = words.length;
@@ -42,15 +49,20 @@ const HomeSection = () => {
   };
 
   const getTimeBarStyle = () => {
+    if (timerExpired) {
+      return { width: "0%", backgroundColor: "#ddd" };
+    }
+
     const percentage = (timeLeft / timerDuration) * 100;
     const color = `rgb(${255 - percentage * 1.5}, ${percentage * 1.5}, 0)`;
     return { width: `${percentage}%`, backgroundColor: color };
   };
 
   return (
-    <HomeContainer>
+    <SectionContainer>
       {currentMovie ? (
         <GameContainer>
+          <GameTitle>Guess The Movie</GameTitle>
           <EmojisWrapper>{currentMovie.emojis}</EmojisWrapper>
           <HintsWrapper>{getHint(currentMovie.name)}</HintsWrapper>
           <TimeBar>
@@ -69,16 +81,20 @@ const HomeSection = () => {
                 The movie was:{" "}
                 <span style={{ fontWeight: "bold" }}>{currentMovie.name}</span>
               </p>
+              <NextButton onClick={handleNextClick} >Next</NextButton>
             </div>
           ) : (
-            <p>Time left: {timeLeft}s</p>
+            <>
+              <p>Time left: {timeLeft}s</p>
+              <NextButton onClick={handleNextClick} >Next</NextButton>
+            </>
           )}
         </GameContainer>
       ) : (
         <p>Loading...</p>
       )}
-    </HomeContainer>
+    </SectionContainer>
   );
 };
 
-export default HomeSection;
+export default GameSection;

@@ -1,12 +1,13 @@
 import styled from "styled-components";
 
-export const HomeContainer = styled.div`
+export const SectionContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100%;
-  background: white;
+  height: 100vh;
+  background: lightgray;
   width: 100%;
   align-items: center;
+  justify-content: center;
 `;
 
 export const EmojisWrapper = styled.div`
@@ -21,7 +22,14 @@ export const GameContainer = styled.div`
   width: 300px;
   justify-content: space-between;
   align-items: center;
+  background: white;
+  padding: 20px;
+  border-radius: 20px;
 `;
+
+export const GameTitle = styled.h1`
+  font-weight: bold;
+`
 
 export const HintsWrapper = styled.div`
   display: flex;
@@ -46,3 +54,20 @@ export const TimeBarFill = styled.div`
   transition: width 1s linear, background-color 1s linear;
   background-color: green;
 `;
+
+export const NextButton = styled.button`
+  padding: 10px 20px;
+  background-color: darkslategrey; 
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 100px;
+  align-items: center;
+
+  &:hover{
+    background-color: lightgray;
+    font-weight: bold;
+    color: darkslategray;
+  }
+`

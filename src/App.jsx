@@ -1,11 +1,10 @@
-import React from 'react'
-import Home from './pages/Home'
+import Game from './pages/Game'
 
 function App() {
 
   return (
     <>
-     <Home/>
+     <Game />
     </>
   )
 }
